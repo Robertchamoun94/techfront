@@ -18,7 +18,7 @@ function App() {
   const services = [
     {
       icon: <ShieldCheck size={22} />,
-      title: "Webb + Drift",
+      title: "Hemsida + Support",
       price: "299kr",
       period: "/månaden",
       stripeUrl: "https://buy.stripe.com/aFa6oH3Cy94kaApdwT67S03",
