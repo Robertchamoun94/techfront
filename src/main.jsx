@@ -168,9 +168,17 @@ const [acceptedTerms, setAcceptedTerms] = useState(false);
   className={service.highlighted ? "primary-btn" : "secondary-btn"}
   type="button"
   onClick={() => {
-    setSelectedService(service);
-    setAcceptedTerms(false);
-  }}
+  if (service.title === "App / SaaS Utveckling") {
+    document
+      .getElementById("contact")
+      ?.scrollIntoView({ behavior: "smooth" });
+
+    return;
+  }
+
+  setSelectedService(service);
+  setAcceptedTerms(false);
+}}
 >
   {service.button}
 </button>
