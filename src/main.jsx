@@ -43,7 +43,7 @@ const [acceptedTerms, setAcceptedTerms] = useState(false);
     },
     {
       icon: <Code2 size={22} />,
-      title: "Engångsköp",
+      title: "Komplett Hemsida",
       price: "5000kr",
       period: "engångsköp",
       stripeUrl: "https://buy.stripe.com/00w28r1uqa8o23TgJ567S02",
@@ -56,6 +56,23 @@ const [acceptedTerms, setAcceptedTerms] = useState(false);
       button: "Köp komplett hemsida",
       highlighted: true,
     },
+    {
+  icon: <Smartphone size={22} />,
+  title: "App / SaaS Utveckling",
+  price: "Offert",
+  period: "skräddarsytt projekt",
+  stripeUrl: "mailto:hellotechfront@hotmail.com",
+  features: [
+    "Skräddarsydd app eller SaaS",
+    "Frontend & backend",
+    "Inloggning & databaser",
+    "API-integrationer",
+    "Skalbar arkitektur",
+    "Personlig offert efter omfattning",
+  ],
+  button: "Begär offert",
+  highlighted: false,
+},
   ];
 
   return (
