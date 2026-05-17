@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, Code2, Layers3, Menu, ShieldCheck, Sparkles, X } from "lucide-react";
+import { AppWindow, ArrowRight, Code2, Layers3, Menu, ShieldCheck, Sparkles, X } from "lucide-react";
 import "./styles.css";
 import Terms from "./Terms.jsx";
 import Privacy from "./Privacy.jsx";
@@ -57,7 +57,7 @@ const [acceptedTerms, setAcceptedTerms] = useState(false);
       highlighted: true,
     },
     {
-  icon: <Smartphone size={22} />,
+  icon: <AppWindow size={22} />,
   title: "App / SaaS Utveckling",
   price: "Offert",
   period: "skräddarsytt projekt",
