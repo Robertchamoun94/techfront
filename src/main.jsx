@@ -45,7 +45,6 @@ function App() {
         "Mobilanpassad",
         "SEO-Grund",
         "Hjälp med domän & publicering",
-        "Ingen teknisk support eller uppdateringar",
       ],
       button: "Köp komplett hemsida",
       highlighted: true,
