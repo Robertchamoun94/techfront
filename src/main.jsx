@@ -71,7 +71,7 @@ const [acceptedTerms, setAcceptedTerms] = useState(false);
     "Personlig offert efter omfattning",
   ],
   button: "Begär offert",
-  highlighted: false,
+  highlighted: true,
 },
   ];
 
