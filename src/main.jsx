@@ -1,13 +1,19 @@
 import React, { useState } from "react";
 import { createRoot } from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, Code2, Layers3, Menu, ShieldCheck, Sparkles, X } from "lucide-react";
 import "./styles.css";
+import Terms from "./Terms.jsx";
+import Privacy from "./Privacy.jsx";
+import PurchaseTerms from "./PurchaseTerms.jsx";
 
 const logoUrl = "/techfront-logo.png";
 
 function App() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [selectedService, setSelectedService] = useState(null);
+const [acceptedTerms, setAcceptedTerms] = useState(false);
 
   const navItems = [
     { label: "Paketpriser", href: "#services" },
@@ -140,14 +146,16 @@ function App() {
                 ))}
               </ul>
 
-              <a
-                className={service.highlighted ? "primary-btn" : "secondary-btn"}
-                href={service.stripeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {service.button}
-              </a>
+              <button
+  className={service.highlighted ? "primary-btn" : "secondary-btn"}
+  type="button"
+  onClick={() => {
+    setSelectedService(service);
+    setAcceptedTerms(false);
+  }}
+>
+  {service.button}
+</button>
             </article>
           ))}
         </div>
@@ -169,40 +177,93 @@ function App() {
       </section>
 
       <section id="contact" className="contact-section">
-  <p className="kicker">TechFront</p>
+        <p className="kicker">TechFront</p>
 
-  <h2>
-    Dags att ge ditt företag en hemsida som känns premium?
-  </h2>
+        <h2>Dags att ge ditt företag en hemsida som känns premium?</h2>
 
-  <p>
-    Vi skapar moderna hemsidor för företag som vill sticka ut,
-    ranka bättre och konvertera fler besökare.
-  </p>
+        <p>
+          Vi skapar moderna hemsidor för företag som vill sticka ut,
+          ranka bättre och konvertera fler besökare.
+        </p>
 
-  <a
-    href="mailto:hellotechfront@hotmail.com"
-    className="contact-btn"
-  >
-    Kontakta TechFront
-  </a>
+        <a href="mailto:hellotechfront@hotmail.com" className="contact-btn">
+          Kontakta TechFront
+        </a>
 
-  <div className="contact-details">
-    <a
-      href="tel:+46700478423"
-      className="contact-link"
-    >
-      +46 70 047 84 23
-    </a>
+        <div className="contact-details">
+          <a href="tel:+46700478423" className="contact-link">
+            +46 70 047 84 23
+          </a>
 
-    <a
-      href="mailto:hellotechfront@hotmail.com"
-      className="contact-link"
-    >
-      hellotechfront@hotmail.com
-    </a>
+          <a href="mailto:hellotechfront@hotmail.com" className="contact-link">
+            hellotechfront@hotmail.com
+          </a>
+        </div>
+
+        <div className="footer-links">
+  <a href="/avtalsvillkor">Avtalsvillkor</a>
+  <a href="/integritetspolicy">Integritetspolicy</a>
+  <a href="/kopvillkor">Köpvillkor</a>
+</div>
+      </section>
+      {selectedService && (
+  <div className="checkout-overlay">
+    <div className="checkout-modal">
+
+      <button
+        className="checkout-close"
+        type="button"
+        onClick={() => setSelectedService(null)}
+      >
+        ×
+      </button>
+
+      <h3>Bekräfta köp</h3>
+
+      <p>
+        Du har valt <strong>{selectedService.title}</strong>.
+        Innan du går vidare till betalning behöver du godkänna våra villkor.
+      </p>
+
+      <label className="terms-check">
+        <input
+          type="checkbox"
+          checked={acceptedTerms}
+          onChange={(e) => setAcceptedTerms(e.target.checked)}
+        />
+
+        <span>
+          Jag godkänner{" "}
+          <a href="/avtalsvillkor" target="_blank">
+            Avtalsvillkor
+          </a>
+          ,{" "}
+          <a href="/integritetspolicy" target="_blank">
+            Integritetspolicy
+          </a>{" "}
+          och{" "}
+          <a href="/kopvillkor" target="_blank">
+            Köpvillkor
+          </a>
+          .
+        </span>
+      </label>
+
+      <a
+        className={`checkout-pay ${!acceptedTerms ? "disabled" : ""}`}
+        href={acceptedTerms ? selectedService.stripeUrl : undefined}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={(e) => {
+          if (!acceptedTerms) e.preventDefault();
+        }}
+      >
+        Fortsätt till betalning
+      </a>
+
+    </div>
   </div>
-</section>
+)}
     </main>
   );
 }
@@ -210,7 +271,7 @@ function App() {
 function Header({ navItems, mobileOpen, setMobileOpen }) {
   return (
     <header className="header">
-      <a href="#top" className="brand" aria-label="TechFront startsida">
+      <a href="/" className="brand" aria-label="TechFront startsida">
         <img src={logoUrl} alt="TechFront logo" />
         <div>
           <strong>TECHFRONT</strong>
@@ -255,4 +316,13 @@ function Step({ title, text }) {
   );
 }
 
-createRoot(document.getElementById("root")).render(<App />);
+createRoot(document.getElementById("root")).render(
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<App />} />
+<Route path="/avtalsvillkor" element={<Terms />} />
+<Route path="/integritetspolicy" element={<Privacy />} />
+<Route path="/kopvillkor" element={<PurchaseTerms />} />
+    </Routes>
+  </BrowserRouter>
+);

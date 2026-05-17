@@ -13,7 +13,8 @@
     "framer-motion": "latest",
     "lucide-react": "latest",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "react-router-dom": "^7.15.1"
   },
   "devDependencies": {
     "vite": "^8.0.13"
