@@ -1,3 +1,4 @@
+import CookieBanner from "./CookieBanner.jsx";
 import React, { useState } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -319,7 +320,15 @@ function Step({ title, text }) {
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<App />} />
+      <Route
+  path="/"
+  element={
+    <>
+      <App />
+      <CookieBanner />
+    </>
+  }
+/>
 <Route path="/avtalsvillkor" element={<Terms />} />
 <Route path="/integritetspolicy" element={<Privacy />} />
 <Route path="/kopvillkor" element={<PurchaseTerms />} />
